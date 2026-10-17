@@ -185,6 +185,11 @@ section{padding:96px 0;border-top:1px solid var(--rule);position:relative}
 footer{padding:30px 0 44px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--rule)}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
+/* Next.js-style blur-in text reveal */
+.nx .nxw{opacity:0;will-change:opacity,filter,transform}
+.nx.in .nxw{animation:nxw .7s cubic-bezier(.2,.65,.2,1) both;animation-delay:var(--d,0ms)}
+@keyframes nxw{0%{opacity:0;filter:blur(12px);transform:translateY(.45em) scale(1.05)}100%{opacity:1;filter:blur(0);transform:none}}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .65s,transform .65s}
 .rv.in{opacity:1;transform:none}
@@ -200,6 +205,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  .nx .nxw{opacity:1!important}.nx.in .nxw{animation:none!important;filter:none!important;transform:none!important}
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none}
   #cursor{display:none!important}
@@ -387,6 +393,35 @@ function show(k){[].forEach.call(tabs.children,function(b){b.setAttribute("aria-
 G[k].forEach(function(s,i){var c=document.createElement("span");c.className="chip";c.style.animationDelay=(reduce?0:i*45)+"ms";c.textContent=s;chips.appendChild(c)})}
 Object.keys(G).forEach(function(k,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===0);b.dataset.k=k;b.textContent=k;  b.onclick=function(){show(k)};tabs.appendChild(b)});
 show("Accounting & Finance");
+})();
+
+/* ============ Next.js-style blur-in text reveal ============ */
+(function(){
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.querySelectorAll(".t, .tsub, .tagline, .phil q").forEach(function(el){
+  if(el.dataset.nxw)return;el.dataset.nxw="1";
+  var delay=0;
+  function walk(node){[].forEach.call(node.childNodes,function(ch){
+    if(ch.nodeType===3){
+      if(!ch.textContent.trim())return;
+      var frag=document.createDocumentFragment();
+      ch.textContent.split(/(\s+)/).forEach(function(tok){
+        if(!tok)return;
+        if(/^\s+$/.test(tok)){frag.appendChild(document.createTextNode(" "));return}
+        var s=document.createElement("span");s.className="nxw";s.style.setProperty("--d",(delay*40)+"ms");delay++;s.textContent=tok;frag.appendChild(s);
+      });
+      node.replaceChild(frag,ch);
+    }else if(ch.nodeType===1){
+      if(ch.classList.contains("num")||ch.tagName==="BR")return;
+      if(ch.classList.contains("grad")||ch.tagName==="CITE"){ch.classList.add("nxw");ch.style.setProperty("--d",(delay*40)+"ms");delay++;return}
+      walk(ch);
+    }
+  })}
+  walk(el);el.classList.add("nx");
+  if(reduce){el.classList.add("in");return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){el.classList.add("in");io.disconnect()}})},{threshold:.25});
+  io.observe(el);
+});
 })();
 
 /* ============ reveal on scroll + timeline glow ============ */
