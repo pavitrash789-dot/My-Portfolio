@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pavitra Sharma — Accounting, Data &amp; Digital Experiences</title>
+<meta name="description" content="B.Com graduate (Finance &amp; Economics) skilled in Tally Prime, Excel, SQL, Power BI and building digital experiences with Python, JavaScript and the web stack.">
+<meta property="og:title" content="Pavitra Sharma — Accounting, Data &amp; Digital Experiences">
+<meta property="og:description" content="I balance the books, then make the numbers talk. Tally Prime · Excel · SQL · Power BI · Python · Web.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080808'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='bold' fill='%236366F1' text-anchor='middle'%3EP%3C/text%3E%3Ccircle cx='46' cy='20' r='7' fill='%2300E5FF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080808;--card:#111111;--card2:#161616;--ink:#F5F5F5;--muted:#888888;
+  --rule:#232323;--accent:#6366F1;--cyan:#00E5FF;--btn:#F5F5F5;--btnt:#080808;
+  --glow:rgba(99,102,241,.35);color-scheme:dark;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,b{font-family:"Space Grotesk",Inter,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
+::selection{background:var(--accent);color:#fff}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+/* ---- preloader ---- */
+#preloader{position:fixed;inset:0;background:var(--bg);z-index:100;display:grid;place-items:center;transition:opacity .6s,transform .6s}
+#preloader.hide{opacity:0;transform:translateY(-4%);pointer-events:none}
+.pl-inner{text-align:center;font-family:"IBM Plex Mono",monospace}
+.pl-num{font-size:56px;font-weight:500;letter-spacing:.05em;color:var(--accent);text-shadow:0 0 24px var(--glow)}
+.pl-tag{margin-top:10px;font-size:12px;letter-spacing:.35em;color:var(--muted);text-transform:uppercase}
+.pl-tag::after{content:"";display:inline-block;width:.6em;height:1em;background:var(--cyan);margin-left:.35em;animation:blink .8s steps(1) infinite;vertical-align:-.2em}
+@keyframes blink{50%{opacity:0}}
+
+/* ---- scroll progress ---- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,var(--accent),var(--cyan));box-shadow:0 0 12px var(--glow)}
+
+/* ---- header ---- */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(8,8,8,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:72px;gap:16px}
+header b{font-weight:700;letter-spacing:-.01em;font-size:20px;display:flex;align-items:center;gap:10px}
+header b em{color:var(--cyan);font-style:normal}
+header b i{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);font-style:normal}
+nav{display:flex;gap:24px;font-size:14.5px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{text-decoration:none;color:var(--muted);white-space:nowrap;position:relative;padding:4px 0;transition:color .2s}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:2px;transition:width .3s}
+nav a:hover,nav a.active{color:var(--ink)}
+nav a:hover::after,nav a.active::after{width:100%}
+#menu{display:none;background:none;border:1px solid var(--rule);color:var(--ink);border-radius:8px;width:40px;height:40px;font-size:18px;cursor:pointer;line-height:1}
+
+/* ---- custom cursor ---- */
+#cursor{position:fixed;top:0;left:0;width:34px;height:34px;border:1.5px solid rgba(0,229,255,.7);border-radius:50%;pointer-events:none;z-index:99;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,border-color .25s;display:none;mix-blend-mode:difference}
+#cursor.on{display:block}
+#cursor.grow{width:58px;height:58px;background:rgba(99,102,241,.25);border-color:var(--accent)}
+@media (pointer:coarse){#cursor{display:none!important}}
+
+/* ---- buttons ---- */
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;border:1.5px solid rgba(245,245,245,.35);text-decoration:none;font-weight:600;font-size:15px;transition:transform .18s,background .18s,box-shadow .18s,border-color .18s;position:relative}
+.btn.p{background:linear-gradient(120deg,var(--accent),#4f46e5);border-color:transparent;box-shadow:0 0 22px var(--glow)}
+.btn.p:hover{box-shadow:0 0 38px var(--glow);transform:translateY(-2px)}
+.btn:hover{transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 18px rgba(0,229,255,.25)}
+
+/* ---- hero ---- */
+.hero{position:relative;min-height:calc(100svh - 72px);display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:64px 0 96px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:auto -20% -40% -20%;height:120%;
+  background-image:linear-gradient(rgba(99,102,241,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.14) 1px,transparent 1px);
+  background-size:52px 52px;transform:perspective(520px) rotateX(58deg);transform-origin:bottom;
+  -webkit-mask-image:linear-gradient(to top,#000 0%,transparent 75%);mask-image:linear-gradient(to top,#000 0%,transparent 75%);animation:gridflow 14s linear infinite}
+@keyframes gridflow{to{background-position:0 52px,0 0}}
+.hero::after{content:"";position:absolute;top:6%;right:-6%;width:44vmin;height:44vmin;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 65%);filter:blur(30px);pointer-events:none}
+.hero-l{position:relative;z-index:2}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.32em;color:var(--cyan);text-transform:uppercase;margin:0 0 18px}
+.kicker::before{content:"— ";color:var(--accent)}
+h1{font-size:clamp(44px,7.4vw,86px);line-height:1.02;letter-spacing:-.035em;font-weight:700;margin:0 0 22px}
+/* creative oversized name */
+.name{font-size:clamp(58px,9.6vw,124px);line-height:.95;letter-spacing:-.02em;margin:0 0 14px;font-weight:700}
+.name span{display:inline-block;will-change:transform;background:linear-gradient(110deg,var(--ink) 22%,var(--accent) 42%,var(--cyan) 58%,var(--ink) 78%);background-size:280% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5.5s linear infinite;animation-delay:var(--d,0s);transition:transform .35s cubic-bezier(.2,1.6,.35,1),filter .35s;filter:drop-shadow(0 0 18px rgba(99,102,241,.18))}
+.name span:hover{transform:translateY(-14px) rotate(-5deg) scale(1.06);filter:drop-shadow(0 0 26px rgba(0,229,255,.45))}
+@keyframes shimmer{0%{background-position:150% 0}100%{background-position:-130% 0}}
+.name .dot2{background:linear-gradient(120deg,var(--accent),var(--cyan));border-radius:50%;width:.16em;height:.16em;margin-left:.06em}
+.tagline{font:800 clamp(30px,4.4vw,52px)/1.14 "Space Grotesk",Inter,sans-serif;letter-spacing:-.025em;margin:0 0 22px;color:var(--ink)}
+.tagline .grad{background:linear-gradient(100deg,var(--accent) 10%,var(--cyan) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .grad{background:linear-gradient(100deg,var(--accent) 10%,var(--cyan) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:34ch;margin:0 0 30px}
+.lead b{color:var(--ink);font-weight:600}
+.hero-r{position:relative;z-index:1;height:clamp(320px,44vw,480px)}
+#stage{width:100%;height:100%;display:block;cursor:grab}
+#stage:active{cursor:grabbing}
+.orb-fallback{position:absolute;inset:0;display:none;place-items:center}
+.orb-fallback i{width:48vmin;height:48vmin;max-width:380px;max-height:380px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(0,229,255,.5),rgba(99,102,241,.28) 55%,transparent 75%);filter:blur(6px);animation:floaty 8s ease-in-out infinite}
+@keyframes floaty{50%{transform:translateY(-18px)}}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.3em;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2}
+.scroll-hint::after{content:"";width:1px;height:44px;background:linear-gradient(var(--accent),transparent);animation:drop 1.6s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---- ledger card ---- */
+.ledger{background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 0 1px rgba(99,102,241,.08);padding:0 0 14px;position:relative;font-family:"IBM Plex Mono",monospace;font-size:13px;overflow:visible}
+.ledger h2{margin:0;padding:13px 16px;font:600 13.5px "Space Grotesk",sans-serif;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;letter-spacing:.02em}
+.ledger h2 em{color:var(--cyan);font-style:normal;font-size:10.5px;letter-spacing:.25em}
+.ledger h2 button{font:500 12px "Space Grotesk",sans-serif;background:none;border:1px solid var(--rule);color:var(--muted);border-radius:99px;padding:4px 12px;cursor:pointer;transition:.2s}
+.ledger h2 button:hover{border-color:var(--cyan);color:var(--cyan)}
+.row{display:grid;grid-template-columns:70px 1fr 76px 76px;gap:6px;padding:8px 16px;border-bottom:1px solid rgba(35,35,35,.6);min-height:36px}
+.row.head{font-weight:500;color:var(--muted);min-height:0;font-size:12px}
+.row.n{animation:post .45s ease-out both}
+@keyframes post{from{opacity:0;transform:translateX(-14px);background:rgba(99,102,241,.22)}to{opacity:1;transform:none;background:transparent}}
+.row span:nth-child(3),.row span:nth-child(4),.tot span:nth-child(3),.tot span:nth-child(4){text-align:right}
+.tot{display:grid;grid-template-columns:70px 1fr 76px 76px;gap:6px;padding:10px 16px 0;font-weight:500;border-top:1.5px solid var(--ink);margin-top:-1px}
+.tot+.stamp-wrap{height:0}
+.stamp{position:absolute;left:50%;bottom:-24px;margin-left:-72px;border:3px double var(--cyan);color:var(--cyan);font:700 21px "Space Grotesk",sans-serif;letter-spacing:.12em;padding:5px 18px;border-radius:10px;background:rgba(8,8,8,.92);box-shadow:0 0 26px rgba(0,229,255,.28);transform:rotate(-7deg) scale(2.2);opacity:0;width:max-content}
+.stamp.on{animation:stamp .5s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes stamp{to{transform:rotate(-7deg) scale(1);opacity:1}}
+
+/* ---- sections ---- */
+section{padding:96px 0;border-top:1px solid var(--rule);position:relative}
+.t{font-size:clamp(32px,5vw,54px);letter-spacing:-.03em;line-height:1.04;margin:0 0 14px;font-weight:700}
+.t .num{font-family:"IBM Plex Mono",monospace;font-size:.42em;color:var(--accent);vertical-align:.55em;margin-right:14px;letter-spacing:.1em}
+.tsub{color:var(--muted);margin:0 0 40px;max-width:60ch}
+
+/* about */
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.about p{margin:0 0 18px;max-width:58ch;color:#c9c9c9}
+.about p b{color:var(--ink)}
+.facts{margin:0;display:grid;gap:16px;align-content:start;background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:28px}
+.facts div{border-left:3px solid var(--accent);padding-left:16px}
+.facts dt{color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.18em;font-family:"IBM Plex Mono",monospace}
+.facts dd{margin:2px 0 0;font-weight:500}
+.phil{border-left:3px solid var(--accent);padding-left:18px;margin:26px 0!important}
+.phil q{font-family:"Space Grotesk",sans-serif;font-size:19px;font-weight:600;line-height:1.5;display:block}
+.phil q::before{content:"“"}.phil q::after{content:"”"}
+.phil cite{color:var(--muted);font-style:normal;font-size:13px;font-family:"IBM Plex Mono",monospace;margin-top:8px;display:block}
+
+/* skills */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.tabs button{font:600 14px "Space Grotesk",sans-serif;padding:10px 20px;border-radius:999px;border:1px solid var(--rule);background:var(--card);color:var(--muted);cursor:pointer;transition:.2s}
+.tabs button:hover{color:var(--ink);border-color:var(--accent)}
+.tabs button[aria-selected=true]{background:linear-gradient(120deg,var(--accent),#4f46e5);color:#fff;border-color:transparent;box-shadow:0 0 20px var(--glow)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;min-height:130px;align-content:flex-start}
+.chip{padding:9px 17px;border-radius:9px;background:var(--card);border:1px solid var(--rule);animation:pop .35s ease-out both;font-size:14.5px;color:#d6d6d6;transition:.2s}
+.chip:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 14px rgba(0,229,255,.2);transform:translateY(-2px)}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+
+/* experience timeline */
+.tl{position:relative;padding-left:34px;max-width:780px}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--rule)}
+.tl::after{content:"";position:absolute;left:7px;top:6px;width:2px;height:var(--prog,0%);background:linear-gradient(var(--accent),var(--cyan));box-shadow:0 0 12px var(--glow);transition:height .9s ease-out}
+.dot{position:absolute;left:0;top:8px;width:17px;height:17px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 14px var(--glow)}
+.tl h3{margin:0;font-size:25px;letter-spacing:-.01em}
+.tl .meta{color:var(--muted);margin:4px 0 16px;font-family:"IBM Plex Mono",monospace;font-size:13px}
+.tl ul,.proj ul{margin:0;padding-left:20px;color:#c9c9c9}
+.tl li,.proj li{margin-bottom:9px}
+.tl li::marker,.proj li::marker{color:var(--accent)}
+.badge{display:inline-block;margin:14px 6px 0 0;padding:5px 13px;border-radius:99px;border:1px solid var(--accent);color:#b9bcff;font-size:12.5px;background:rgba(99,102,241,.08)}
+
+/* projects */
+.projs{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.proj{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:28px;transition:transform .2s,box-shadow .25s,border-color .25s;transform-style:preserve-3d;will-change:transform}
+.proj:hover{border-color:rgba(99,102,241,.5);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 32px rgba(99,102,241,.14)}
+.proj h3{margin:0 0 6px;font-size:22px;letter-spacing:-.01em}
+.proj .tags{color:var(--cyan);font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;margin-bottom:14px;display:block}
+.proj a{display:inline-flex;align-items:center;gap:7px;margin-top:16px;text-decoration:none;font-size:14px;font-weight:600;color:var(--cyan)}
+.proj a:hover{text-decoration:underline}
+.proj a svg{width:15px;height:15px}
+
+/* certification */
+.cert{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:24px;max-width:780px}
+.cert i{flex:none;width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--cyan));color:#080808;display:grid;place-items:center;font:700 24px "Space Grotesk";font-style:normal}
+.cert p{margin:0;color:#c9c9c9}
+.cert b{color:var(--ink)}
+
+/* contact */
+.contact{padding-bottom:120px}
+.contact a.big{display:block;font-size:clamp(30px,6.4vw,72px);font-weight:700;letter-spacing:-.03em;text-decoration:none;word-break:break-all;line-height:1.12;font-family:"Space Grotesk",sans-serif;background:linear-gradient(var(--cyan),var(--cyan)) 0 100%/0 .14em no-repeat;transition:background-size .35s,color .35s;width:max-content;max-width:100%}
+.contact a.big:hover{background-size:100% .14em}
+.links{display:flex;gap:26px;flex-wrap:wrap;margin-top:24px}
+.links a,.links span{color:var(--muted);text-decoration:none;transition:.2s}
+.links a:hover{color:var(--cyan)}
+.links a{display:inline-flex;align-items:center;gap:8px}
+.links svg{width:16px;height:16px}
+footer{padding:30px 0 44px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--rule)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .65s,transform .65s}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero,.about,.projs{grid-template-columns:1fr}
+  .hero{min-height:0;padding-top:40px}
+  .hero-r{height:56vw;min-height:300px;order:-1}
+  .scroll-hint{display:none}
+  #menu{display:block}
+  nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(8,8,8,.96);backdrop-filter:blur(16px);flex-direction:column;padding:16px 22px 26px;border-bottom:1px solid var(--rule);gap:18px}
+  nav.open{display:flex}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+  #cursor{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="preloader" aria-hidden="true">
+  <div class="pl-inner">
+    <div class="pl-num" id="pl-num">000%</div>
+    <div class="pl-tag">Crafting digital experiences</div>
+  </div>
+</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap">
+    <b><i></i><em>Pavitra</em>&nbsp;Sharma</b>
+    <button id="menu" type="button" aria-expanded="false" aria-label="Open menu">☰</button>
+    <nav aria-label="Sections" id="nav">
+      <a href="#hero">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article id="hero" class="hero">
+  <div class="hero-l">
+    <p class="kicker">Accounting × Data × Web</p>
+    <h1 class="name" aria-label="Pavitra Sharma"><span style="--d:0s">P</span><span style="--d:.07s">A</span><span style="--d:.14s">V</span><span style="--d:.21s">I</span><span style="--d:.28s">T</span><span style="--d:.35s">R</span><span style="--d:.42s">A</span><br><span style="--d:.49s">S</span><span style="--d:.56s">H</span><span style="--d:.63s">A</span><span style="--d:.7s">R</span><span style="--d:.77s">M</span><span style="--d:.84s">A</span><span class="dot2" aria-hidden="true"></span></h1>
+    <p class="tagline">I balance the books. <span class="grad">Then I make the numbers talk.</span></p>
+    <p class="lead"><b>Accounting &amp; Data Analyst</b> crafting clarity with <b>Tally Prime, Excel, SQL &amp; Power BI</b> — and building digital experiences with Python &amp; JavaScript on the side.</p>
+    <div class="btns">
+      <a class="btn p" href="#projects" data-magnet>Explore My Work</a>
+      <a class="btn" href="https://wa.me/917665534302?text=Hi%20Pavitra!%20%F0%9F%91%8B%20I%20just%20visited%20your%20portfolio%20and%20I%27d%20love%20to%20connect." target="_blank" rel="noopener" data-magnet>Let's Connect</a>
+    </div>
+  </div>
+  <div class="hero-r" aria-hidden="true">
+    <canvas id="stage"></canvas>
+    <div class="orb-fallback" id="orb-fallback"><i></i></div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</article>
+
+<div style="max-width:560px">
+  <div class="ledger" aria-label="Animated sample ledger that posts entries until debits equal credits">
+    <h2><span>Sample journal postings</span><em>LEDGER·LIVE</em><button id="replay" type="button">Replay</button></h2>
+    <div class="row head"><span>Voucher</span><span>Particulars</span><span>Dr (₹)</span><span>Cr (₹)</span></div>
+    <div id="rows"></div>
+    <div class="tot"><span></span><span>Total</span><span id="td">0</span><span id="tc">0</span></div>
+    <div class="stamp" id="stamp">✔ BALANCED</div>
+  </div>
+</div>
+
+<section id="about"><h2 class="t"><span class="num">01</span>About me</h2>
+<p class="tsub">B.Com (Finance &amp; Economics), University of Kota · 2023–2026 — Kota, Rajasthan</p>
+<div class="about">
+  <div>
+    <p>I'm a <b>B.Com graduate in Finance &amp; Economics</b> with hands-on accounting experience and a data-oriented approach to financial operations.</p>
+    <p>I record transactions in <b>Tally Prime</b>, track receivables and payables, reconcile bank statements and analyse data in <b>Excel</b>. I'm now adding <b>SQL, Python and web development</b> to turn financial data into clearer reports — and building full digital experiences while I'm at it.</p>
+    <p>Colleagues can count on me for accuracy, structured problem-solving, attention to detail and ownership.</p>
+    <div class="phil"><q>I don't just record transactions. I turn them into reports and stories people actually use.</q><cite>— my development philosophy</cite></div>
+    <div class="btns"><a class="btn" href="mailto:pavitrash789@gmail.com?subject=Resume%20request" data-magnet>Request Resume</a><a class="btn" href="https://linkedin.com/in/pavitra-sharma-031b77317" target="_blank" rel="noopener" data-magnet>LinkedIn</a></div>
+  </div>
+  <dl class="facts">
+    <div><dt>Education</dt><dd>B.Com, Finance &amp; Economics · University of Kota · 2023–2026</dd></div>
+    <div><dt>Coursework</dt><dd>Financial Accounting, Cost Accounting, Economics, Business Statistics, Taxation Fundamentals, Corporate Finance</dd></div>
+    <div><dt>Certification</dt><dd>Business Analysis &amp; Process Management · Coursera · 2026</dd></div>
+    <div><dt>Based in</dt><dd>Kota, Rajasthan</dd></div>
+    <div><dt>Also learning</dt><dd>Python, JavaScript, Flask, Node.js, React, Supabase</dd></div>
+  </dl>
+</div></section>
+
+<section id="skills"><h2 class="t"><span class="num">02</span>Skills</h2>
+<p class="tsub">Click a group to explore my toolkit — from the ledger to the browser.</p>
+<div class="tabs" role="tablist" aria-label="Skill groups" id="tabs"></div>
+<div class="chips" id="chips" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<section id="experience"><h2 class="t"><span class="num">03</span>Experience</h2>
+<div class="tl" id="tl">
+  <span class="dot"></span>
+  <h3>Accounting Intern</h3>
+  <p class="meta">S. K. Jain &amp; Associates, Kota · Jun 2025 – Mar 2026</p>
+  <ul>
+    <li class="rv">Recorded transactions in Tally Prime by organising invoices, receipts and payment vouchers.</li>
+    <li class="rv">Supported ledger posting and expense classification, making monthly records clearer.</li>
+    <li class="rv">Built Excel Accounts Receivable and Accounts Payable trackers to support timely payment follow-up.</li>
+    <li class="rv">Performed bank reconciliation by matching bank statements with accounting records and flagging discrepancies.</li>
+    <li class="rv">Collected missing financial documents from the team to improve month-end filing accuracy.</li>
+  </ul>
+  <span class="badge">Tally Prime</span><span class="badge">Excel</span><span class="badge">Bank Reconciliation</span><span class="badge">AR / AP</span>
+</div></section>
+
+<section id="projects"><h2 class="t"><span class="num">04</span>Projects</h2>
+<p class="tsub">Two projects I actually built — one on markets, one on books.</p>
+<div class="projs">
+  <article class="proj rv tilt"><h3>Financial Data Analysis &amp; Market Research Report</h3>
+    <span class="tags">EXCEL · PIVOTTABLES · DASHBOARDS · RESEARCH</span>
+    <ul><li>Analysed consumer-spending trends and competitor pricing for a mid-sized retail segment.</li>
+    <li>Cleaned datasets in Excel and built PivotTables and dashboards for monthly sales and product contribution.</li>
+    <li>Delivered a report with 10+ charts and tables on cost control and revenue opportunities.</li></ul></article>
+  <article class="proj rv tilt"><h3>Bookkeeping &amp; Tally Prime Accounting Simulation</h3>
+    <span class="tags">TALLY PRIME · JOURNAL VOUCHERS · TRIAL BALANCE</span>
+    <ul><li>Simulated the full monthly accounting cycle for a small trading business in Tally Prime.</li>
+    <li>Recorded sales, purchase, receipt, payment, contra and journal vouchers.</li>
+    <li>Cross-checked Tally balances with Excel schedules and completed trial-balance review and basic financial statements.</li></ul></article>
+</div></section>
+
+<section id="certification"><h2 class="t"><span class="num">05</span>Certification</h2>
+<div class="cert rv"><i>C</i><p><b>Business Analysis &amp; Process Management</b><br>Coursera · May – Jun 2026<br>Requirements analysis, process mapping, root-cause analysis, process improvement and documentation.</p></div>
+</section>
+
+<section id="contact" class="contact"><h2 class="t"><span class="num">06</span>Have something amazing in mind?</h2>
+<p class="tsub">Let's create something extraordinary — I'm open to roles, internships and freelance projects.</p>
+<a class="big" href="mailto:pavitrash789@gmail.com">pavitrash789@gmail.com</a>
+<div class="links">
+  <a href="tel:+917665534202"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+91 76655 34202</a>
+  <a href="https://linkedin.com/in/pavitra-sharma-031b77317" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.27 2.36 4.27 5.44v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>LinkedIn</a>
+  <a href="https://github.com/pavitrash789-dot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.93c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a>
+  <span>Kota, Rajasthan</span>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavitra Sharma. Ledger figures in the hero are sample data.</span>
+  <span>Built with plain HTML, CSS &amp; Three.js — no frameworks needed.</span>
+</div></footer>
+
+<script>
+/* ============ preloader ============ */
+(function(){
+  var pl=document.getElementById('preloader'),num=document.getElementById('pl-num');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function done(){if(pl.dataset.done)return;pl.dataset.done='1';pl.classList.toggle('hide',true);setTimeout(function(){pl.remove()},700)}
+  if(reduce){done();return}
+  var p=0,t;
+  t=setInterval(function(){p=Math.min(100,p+Math.ceil(Math.random()*11)+4);num.textContent=(p<10?'00':p<100?'0':'')+p+'%';if(p>=100){clearInterval(t);setTimeout(done,280)}},95);
+  setTimeout(done,3200); /* never trap behind loading */
+})();
+
+/* ============ scroll progress + active nav + mobile menu ============ */
+(function(){
+  var bar=document.getElementById('progress');
+  addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+  var menu=document.getElementById('menu'),nav=document.getElementById('nav');
+  menu.addEventListener('click',function(){var open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',open);menu.textContent=open?'✕':'☰'});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰'}});
+  /* active section indicator */
+  var links={};[].forEach.call(nav.querySelectorAll('a'),function(a){links[a.getAttribute('href').slice(1)]=a});
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){var a=links[e.target.id];if(!a)return;if(e.isIntersecting){[].forEach.call(nav.querySelectorAll('a'),function(x){x.classList.remove('active')});a.classList.add('active')}})},{rootMargin:'-35% 0px -60% 0px'});
+  document.querySelectorAll('main section, #hero').forEach(function(s){obs.observe(s)});
+})();
+
+/* ============ ledger animation ============ */
+(function(){
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var E=[["Sales","Customer A/c",45000,0],["Sales","Sales A/c",0,45000],["Receipt","Bank A/c",30000,0],["Receipt","Customer A/c",0,30000],["Purchase","Purchase A/c",28500,0],["Purchase","Vendor A/c",0,28500],["Payment","Vendor A/c",21000,0],["Payment","Bank A/c",0,21000]];
+var rows=document.getElementById("rows"),td=document.getElementById("td"),tc=document.getElementById("tc"),st=document.getElementById("stamp"),timers=[];
+var f=function(n){return n.toLocaleString("en-IN")};
+function count(el,from,to){if(reduce){el.textContent=f(to);return}var t0=performance.now();(function s(t){var p=Math.min((t-t0)/380,1);el.textContent=f(Math.round(from+(to-from)*p));if(p<1)requestAnimationFrame(s)})(t0)}
+function run(){timers.forEach(clearTimeout);timers=[];rows.innerHTML="";td.textContent=tc.textContent="0";st.className="stamp";var D=0,C=0;
+E.forEach(function(e,i){timers.push(setTimeout(function(){var r=document.createElement("div");r.className="row"+(reduce?"":" n");
+r.innerHTML="<span>"+e[0]+"</span><span>"+e[1]+"</span><span>"+(e[2]?f(e[2]):"")+"</span><span>"+(e[3]?f(e[3]):"")+"</span>";rows.appendChild(r);
+if(e[2]){count(td,D,D+e[2]);D+=e[2]}else{count(tc,C,C+e[3]);C+=e[3]}
+if(i===E.length-1)timers.push(setTimeout(function(){st.className="stamp on"},reduce?0:450))},reduce?0:600+i*650))})}
+document.getElementById("replay").onclick=run;run();
+})();
+
+/* ============ skills (full toolkit) ============ */
+(function(){
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var G={
+"Accounting & Finance":["Tally Prime","Bookkeeping","Journal Entries","Ledger Posting","Bank Reconciliation","Accounts Payable","Accounts Receivable","Financial Analysis","Payroll Basics"],
+"Excel & MIS Reporting":["Microsoft Excel","PivotTables","VLOOKUP","SUMIF","Conditional Formatting","Data Cleaning","Dashboards","MIS Reporting"],
+"SQL & Data Analysis":["MySQL","SQL","Database Queries","Data Analysis","Data Visualization","Data Reporting","Data Interpretation","Business Intelligence","Power BI"],
+"Programming & Full-Stack":["Python","HTML","CSS","JavaScript","Full-Stack Development","Frontend Development","Backend Development","Web Development","REST APIs","Git","GitHub"],
+"Learning & Exploring":["Flask","Node.js","React","VS Code","Supabase"],
+"Business & Process":["Business Analysis","Process Management","Problem Solving","Process Improvement"]};
+var tabs=document.getElementById("tabs"),chips=document.getElementById("chips");
+function show(k){[].forEach.call(tabs.children,function(b){b.setAttribute("aria-selected",b.dataset.k===k)});chips.innerHTML="";
+G[k].forEach(function(s,i){var c=document.createElement("span");c.className="chip";c.style.animationDelay=(reduce?0:i*45)+"ms";c.textContent=s;chips.appendChild(c)})}
+Object.keys(G).forEach(function(k,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===0);b.dataset.k=k;b.textContent=k;  b.onclick=function(){show(k)};tabs.appendChild(b)});
+show("Accounting & Finance");
+})();
+
+/* ============ reveal on scroll + timeline glow ============ */
+(function(){
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.18});
+[].forEach.call(document.querySelectorAll(".rv"),function(el){io.observe(el)});
+var tl=document.getElementById("tl");if(tl){new IntersectionObserver(function(es,o){if(es[0].isIntersecting){tl.style.setProperty("--prog","100%");o.disconnect()}},{threshold:.15}).observe(tl)}
+})();
+
+/* ============ 3D tilt on project cards (fine pointers only) ============ */
+(function(){
+var fine=matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!fine)return;
+document.querySelectorAll('.tilt').forEach(function(card){
+  card.style.transition='transform .25s, box-shadow .25s, border-color .25s';
+  card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform='perspective(900px) rotateY('+(x*7)+'deg) rotateX('+(-y*7)+'deg) scale(1.015)'});
+  card.addEventListener('mouseleave',function(){card.style.transform='none'});
+});
+})();
+
+/* ============ custom cursor + magnetic buttons ============ */
+(function(){
+var fine=matchMedia('(pointer:fine)').matches,c=document.getElementById('cursor');
+if(!fine||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+c.classList.add('on');var x=innerWidth/2,y=innerHeight/2,tx=x,ty=y;
+addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY},{passive:true});
+(function loop(){x+=(tx-x)*.2;y+=(ty-y)*.2;c.style.left=x+'px';c.style.top=y+'px';requestAnimationFrame(loop)})();
+document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.chip'))c.classList.add('grow')});
+document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.chip'))c.classList.remove('grow')});
+/* magnetic */
+document.querySelectorAll('[data-magnet]').forEach(function(el){
+  el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();el.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)'});
+  el.addEventListener('mouseleave',function(){el.style.transform='none'});
+});
+})();
+</script>
+
+<!-- ============ 3D hero (Three.js, graceful fallback) ============ -->
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}
+</script>
+<script type="module">
+try{
+  const THREE = await import('three');
+  const canvas=document.getElementById('stage');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(45,1,.1,50);cam.position.set(0,0,7);
+  scene.add(new THREE.AmbientLight(0x222244,1.4));
+  const l1=new THREE.PointLight(0x00E5FF,60);l1.position.set(4,3,3);scene.add(l1);
+  const l2=new THREE.PointLight(0x6366F1,80);l2.position.set(-4,-3,2);scene.add(l2);
+  const l3=new THREE.PointLight(0xffffff,25);l3.position.set(0,0,6);scene.add(l3);
+  const geo=new THREE.TorusKnotGeometry(1.35,.42,180,28);
+  const mat=new THREE.MeshPhysicalMaterial({color:0x1b1b2f,metalness:1,roughness:.28,clearcoat:.6,clearcoatRoughness:.4});
+  const obj=new THREE.Mesh(geo,mat);scene.add(obj);
+  const wire=new THREE.Mesh(new THREE.TorusKnotGeometry(1.38,.45,120,18),
+    new THREE.MeshBasicMaterial({color:0x00E5FF,wireframe:true,transparent:true,opacity:.14}));
+  obj.add(wire);
+  const halo=new THREE.Mesh(new THREE.IcosahedronGeometry(2.6,1),
+    new THREE.MeshBasicMaterial({color:0x6366F1,wireframe:true,transparent:true,opacity:.07}));
+  scene.add(halo);
+  function size(){const w=canvas.clientWidth||canvas.parentElement.clientWidth,h=canvas.clientHeight||canvas.parentElement.clientHeight;
+    renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+  size();addEventListener('resize',size);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let mx=0,my=0,scroll=0;
+  if(!reduce){addEventListener('mousemove',function(e){mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)},{passive:true});
+    addEventListener('scroll',function(){const h=innerHeight;scroll=Math.min(1,Math.max(0,(h-scrollY)/h))},{passive:true})}
+  if(reduce){obj.rotation.set(.5,.7,0)}
+  (function tick(t){
+    t/=1000;
+    if(!reduce){
+      obj.rotation.y+=.0035+mx*.0008;
+      obj.rotation.z=Math.sin(t*.5)*.06;
+      obj.position.y=Math.sin(t*.9)*.18;
+      obj.position.x+=(mx*.7-obj.position.x)*.04;
+      obj.rotation.x+=(Math.sin(t*.4)*.12+my*.3-obj.rotation.x)*.04;
+      const s=1-scroll*.28;obj.scale.setScalar(Math.max(.6,s));
+      halo.rotation.y-=.002;halo.rotation.x+=my*.0008;
+    }else{obj.position.y=Math.sin(t*.4)*.1}
+    renderer.render(scene,cam);requestAnimationFrame(tick);
+  })(0);
+}catch(e){
+  /* WebGL/module fetch failed — show CSS fallback orb, everything else still works */
+  document.getElementById('stage').style.display='none';
+  const fb=document.getElementById('orb-fallback');if(fb)fb.style.display='grid';
+}
+</script>
+</body>
+</html>
