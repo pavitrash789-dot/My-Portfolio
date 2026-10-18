@@ -21,6 +21,16 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* animated aurora background: drifting glow blobs + floating particles */
+#bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+#bg .aur{position:absolute;width:62vmax;height:62vmax;border-radius:50%;filter:blur(72px);mix-blend-mode:screen}
+#bg .a{background:radial-gradient(circle,#6366F1,transparent 62%);opacity:.16;top:-20vmax;right:-12vmax;animation:drift1 26s ease-in-out infinite alternate}
+#bg .b{background:radial-gradient(circle,#00E5FF,transparent 62%);opacity:.10;bottom:-24vmax;left:-14vmax;animation:drift2 34s ease-in-out infinite alternate}
+#bg .c{background:radial-gradient(circle,#4f46e5,transparent 62%);opacity:.09;top:34%;left:38%;animation:drift3 40s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(-9vmax,7vmax) scale(1.18)}}
+@keyframes drift2{to{transform:translate(10vmax,-7vmax) scale(1.12)}}
+@keyframes drift3{to{transform:translate(-7vmax,-9vmax) scale(.92)}}
+#bgfx{position:absolute;inset:0;width:100%;height:100%}
 h1,h2,h3,b{font-family:"Space Grotesk",Inter,sans-serif}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
@@ -207,6 +217,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  #bg .aur{animation:none!important}
   .nx .nxw{opacity:1!important}.nx.in .nxw{animation:none!important;filter:none!important;transform:none!important}
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none}
@@ -223,6 +234,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </div>
 <div id="progress" aria-hidden="true"></div>
+<div id="bg" aria-hidden="true">
+  <div class="aur a"></div><div class="aur b"></div><div class="aur c"></div>
+  <canvas id="bgfx"></canvas>
+</div>
 <div id="cursor" aria-hidden="true"></div>
 
 <header>
@@ -452,6 +467,35 @@ document.querySelectorAll('.tilt').forEach(function(card){
     card.style.transform='perspective(900px) rotateY('+(x*7)+'deg) rotateX('+(-y*7)+'deg) scale(1.015)'});
   card.addEventListener('mouseleave',function(){card.style.transform='none'});
 });
+})();
+
+/* ============ aurora background: floating particle field ============ */
+(function(){
+var cv=document.getElementById('bgfx');if(!cv)return;
+var ctx=cv.getContext('2d');
+if(!ctx){cv.style.display='none';return} /*even without canvas, aurora blobs still animate*/
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var P=[],W=0,H=0;
+var COLORS=[[99,102,241],[0,229,255],[245,245,245],[79,70,229]];
+function size(){W=cv.width=innerWidth*Math.min(devicePixelRatio,1.5);H=cv.height=innerHeight*Math.min(devicePixelRatio,1.5);}
+function mk(){return {x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.8+.7)*Math.min(devicePixelRatio,1.5),s:(Math.random()*.35+.12)*Math.min(devicePixelRatio,1.5),c:COLORS[Math.floor(Math.random()*COLORS.length)],tw:Math.random()*Math.PI*2,a:Math.random()*.35+.2};}
+function spawn(){P=[];var n=Math.min(90,Math.floor(innerWidth*innerHeight/16000));for(var i=0;i<n;i++)P.push(mk());}
+size();spawn();addEventListener('resize',function(){size();spawn()},{passive:true});
+var running=true;document.addEventListener('visibilitychange',function(){running=!document.hidden});
+if(reduce){ /* static dots only */
+  ctx.globalCompositeOperation='lighter';P.forEach(function(p){ctx.fillStyle='rgba('+p.c[0]+','+p.c[1]+','+p.c[2]+','+p.a*.6+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fill()});
+}else{(function tick(){
+  if(running){
+    ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';
+    P.forEach(function(p){
+      p.y-=p.s;p.x+=Math.sin((p.tw+=.008))*.18;
+      if(p.y< -6){p.y=H+6;p.x=Math.random()*W}
+      ctx.fillStyle='rgba('+p.c[0]+','+p.c[1]+','+p.c[2]+','+(p.a+Math.sin(p.tw*2)*.12)+')';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fill();
+    });
+  }
+  requestAnimationFrame(tick);
+})();}
 })();
 
 /* ============ custom cursor + magnetic buttons ============ */
