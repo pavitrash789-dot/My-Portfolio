@@ -135,15 +135,17 @@ section{padding:96px 0;border-top:1px solid var(--rule);position:relative}
 .phil q::before{content:"“"}.phil q::after{content:"”"}
 .phil cite{color:var(--muted);font-style:normal;font-size:13px;font-family:"IBM Plex Mono",monospace;margin-top:8px;display:block}
 
-/* skills */
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
-.tabs button{font:600 14px "Space Grotesk",sans-serif;padding:10px 20px;border-radius:999px;border:1px solid var(--rule);background:var(--card);color:var(--muted);cursor:pointer;transition:.2s}
-.tabs button:hover{color:var(--ink);border-color:var(--accent)}
-.tabs button[aria-selected=true]{background:linear-gradient(120deg,var(--accent),#4f46e5);color:#fff;border-color:transparent;box-shadow:0 0 20px var(--glow)}
-.chips{display:flex;flex-wrap:wrap;gap:10px;min-height:130px;align-content:flex-start}
-.chip{padding:9px 17px;border-radius:9px;background:var(--card);border:1px solid var(--rule);animation:pop .35s ease-out both;font-size:14.5px;color:#d6d6d6;transition:.2s}
-.chip:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 14px rgba(0,229,255,.2);transform:translateY(-2px)}
-@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+/* skills — grouped scroll reveal */
+.sgroups{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.sgroup{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:24px 20px;transition:border-color .25s,box-shadow .25s,transform .25s}
+.sgroup:hover{border-color:rgba(99,102,241,.5);box-shadow:0 0 28px rgba(99,102,241,.12);transform:translateY(-4px)}
+.sgroup h3{margin:0 0 4px;font-size:19px;letter-spacing:-.01em}
+.sgroup .ge{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.28em;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:16px}
+.sgroup ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.sgroup li{padding:7px 13px;border-radius:8px;background:rgba(245,245,245,.04);border:1px solid var(--rule);font-size:13.5px;color:#d6d6d6;transition:.2s;opacity:0;filter:blur(6px);transform:translateY(10px) scale(.94)}
+.sgroup.in li{animation:pop .4s cubic-bezier(.2,.65,.2,1) both;animation-delay:var(--d,0ms)}
+.sgroup li:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 12px rgba(0,229,255,.25);transform:translateY(-2px)!important;filter:none}
+@keyframes pop{from{opacity:0;filter:blur(6px);transform:translateY(10px) scale(.94)}to{opacity:1;filter:blur(0);transform:none}}
 
 /* experience timeline */
 .tl{position:relative;padding-left:34px;max-width:780px}
@@ -282,9 +284,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </div></section>
 
 <section id="skills"><h2 class="t"><span class="num">02</span>Skills</h2>
-<p class="tsub">Click a group to explore my toolkit — from the ledger to the browser.</p>
-<div class="tabs" role="tablist" aria-label="Skill groups" id="tabs"></div>
-<div class="chips" id="chips" role="tabpanel" aria-live="polite"></div>
+<p class="tsub">My full toolkit, ledger to browser — scroll and watch it come alive.</p>
+<div class="sgroups" id="sgroups"></div>
 </section>
 
 <section id="experience"><h2 class="t"><span class="num">03</span>Experience</h2>
@@ -378,9 +379,8 @@ if(i===E.length-1)timers.push(setTimeout(function(){st.className="stamp on"},red
 document.getElementById("replay").onclick=run;run();
 })();
 
-/* ============ skills (full toolkit) ============ */
+/* ============ skills — grouped grid with scroll reveal ============ */
 (function(){
-var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 var G={
 "Accounting & Finance":["Tally Prime","Bookkeeping","Journal Entries","Ledger Posting","Bank Reconciliation","Accounts Payable","Accounts Receivable","Financial Analysis","Payroll Basics"],
 "Excel & MIS Reporting":["Microsoft Excel","PivotTables","VLOOKUP","SUMIF","Conditional Formatting","Data Cleaning","Dashboards","MIS Reporting"],
@@ -388,11 +388,22 @@ var G={
 "Programming & Full-Stack":["Python","HTML","CSS","JavaScript","Full-Stack Development","Frontend Development","Backend Development","Web Development","REST APIs","Git","GitHub"],
 "Learning & Exploring":["Flask","Node.js","React","VS Code","Supabase"],
 "Business & Process":["Business Analysis","Process Management","Problem Solving","Process Improvement"]};
-var tabs=document.getElementById("tabs"),chips=document.getElementById("chips");
-function show(k){[].forEach.call(tabs.children,function(b){b.setAttribute("aria-selected",b.dataset.k===k)});chips.innerHTML="";
-G[k].forEach(function(s,i){var c=document.createElement("span");c.className="chip";c.style.animationDelay=(reduce?0:i*45)+"ms";c.textContent=s;chips.appendChild(c)})}
-Object.keys(G).forEach(function(k,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===0);b.dataset.k=k;b.textContent=k;  b.onclick=function(){show(k)};tabs.appendChild(b)});
-show("Accounting & Finance");
+var emojis={"Accounting & Finance":"🧾","Excel & MIS Reporting":"📊","SQL & Data Analysis":"🗄️","Programming & Full-Stack":"💻","Learning & Exploring":"🚀","Business & Process":"⚙️"};
+var wrap=document.getElementById("sgroups");
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+Object.keys(G).forEach(function(k){
+  var g=document.createElement("div");g.className="sgroup";
+  g.innerHTML='<h3>'+emojis[k]+' '+k+'</h3><span class="ge">'+G[k].length+' skills</span><ul>'+G[k].map(function(s){return '<li>'+s+'</li>'}).join('')+'</ul>';
+  wrap.appendChild(g);
+  var items=g.querySelectorAll("li");
+  items.forEach(function(li,i){li.style.setProperty("--d",(i*45+120)+"ms")});
+  if(!reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){g.classList.add("in");io.disconnect()}
+    })},{threshold:.3});
+    io.observe(g);
+  }else{g.classList.add("in")}
+});
 })();
 
 /* ============ Next.js-style blur-in text reveal ============ */
