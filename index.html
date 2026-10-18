@@ -21,10 +21,6 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-/* Milky Way background: fixed canvas + soft drift over it */
-#galaxy{position:fixed;inset:0;z-index:-2;width:100vw;height:100vh;display:block}
-#galaxy-fallback{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse 70% 42% at 68% 12%,rgba(99,102,241,.16),transparent 60%),radial-gradient(ellipse 60% 40% at 18% 68%,rgba(0,229,255,.10),transparent 60%),radial-gradient(ellipse 90% 70% at 50% 120%,rgba(99,102,241,.08),transparent 65%)}
-@supports (backdrop-filter:blur(1px)){#galaxy-fallback{display:none}}
 h1,h2,h3,b{font-family:"Space Grotesk",Inter,sans-serif}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
@@ -227,7 +223,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </div>
 <div id="progress" aria-hidden="true"></div>
-<div id="galaxy-fallback" aria-hidden="true"></div>
 <div id="cursor" aria-hidden="true"></div>
 
 <header>
@@ -486,49 +481,6 @@ try{
   const canvas=document.getElementById('stage');
   const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  /* ---- Milky Way galaxy background (whole page, behind everything) ---- */
-  const gcanvas=document.createElement('canvas');
-  const g=new THREE.WebGLRenderer({canvas:gcanvas,alpha:false,antialias:false,powerPreference:'low-power'});
-  g.setPixelRatio(Math.min(devicePixelRatio,1.6));
-  g.setClearColor(0x080808,1);
-  const gs=new THREE.Scene();
-  const gcam=new THREE.PerspectiveCamera(60,1,.1,120);gcam.position.set(0,0,26);
-  function gsize(){const w=innerWidth,h=innerHeight;g.setSize(w,h,false);gcam.aspect=w/h;gcam.updateProjectionMatrix()}
-  gsize();addEventListener('resize',gsize,{passive:true});
-  const GM=Math.min(innerWidth<700?1400:2800,4000);
-  const gpos=new Float32Array(GM*3),gcol=new Float32Array(GM*3);
-  for(let i=0;i<GM;i++){
-    const arm=(i%2)*Math.PI, t=Math.random()*3.2, r=3+t*8.5;
-    const a=arm+t*2.1+(Math.random()-.5)*(.8-t*.12);
-    gpos[i*3]=Math.cos(a)*r+(Math.random()-.5)*3.4;
-    gpos[i*3+1]=(Math.random()-.5)*2.6*(1-t*.2);
-    gpos[i*3+2]=Math.sin(a)*r*.55-4;
-    const c=new THREE.Color();
-    if(Math.random()<.12){c.setHSL(.58,.85,.72)}else if(Math.random()<.2){c.setHSL(.42,.75,.62)}else{c.setHSL(.66,.2,.82)}
-    gcol[i*3]=c.r;gcol[i*3+1]=c.g;gcol[i*3+2]=c.b;
-  }
-  const gGeo=new THREE.BufferGeometry();
-  gGeo.setAttribute('position',new THREE.BufferAttribute(gpos,3));
-  gGeo.setAttribute('color',new THREE.BufferAttribute(gcol,3));
-  const galaxy=new THREE.Points(gGeo,new THREE.PointsMaterial({size:.5,vertexColors:true,transparent:true,opacity:.85,sizeAttenuation:true,blending:THREE.AdditiveBlending,depthWrite:false}));
-  gs.add(galaxy);
-  const core=new THREE.Mesh(new THREE.CircleGeometry(4.2,48),new THREE.MeshBasicMaterial({color:0x2a2a55,transparent:true,opacity:.16,blending:THREE.AdditiveBlending,depthWrite:false}));
-  core.position.set(0,-0,-5);gs.add(core);
-  const gmmx={x:0,y:0};
-  let gmx=0,gmy=0,gscroll=0;
-  addEventListener('mousemove',function(e){gmx=(e.clientX/innerWidth-.5);gmy=(e.clientY/innerHeight-.5)},{passive:true});
-  addEventListener('scroll',function(){const h=innerHeight;gscroll=Math.min(1,Math.max(0,(h-scrollY)/h))},{passive:true});
-  (function gtick(t){t/=1000;
-    galaxy.rotation.y=t*.012;
-    galaxy.rotation.z=.42+Math.sin(t*.05)*.05;
-    galaxy.position.y=Math.sin(t*.1)*1.4;
-    gcam.position.x+=(gmx*2.4-gcam.position.x)*.03;
-    gcam.position.y+=(-gmy*1.6+gscroll*3.2-gcam.position.y)*.03;
-    gcam.lookAt(0,0,-6);
-    g.render(gs,gcam);
-    requestAnimationFrame(gtick);
-  })(0);
-  document.body.prepend(gcanvas);gcanvas.id='galaxy';gcanvas.setAttribute('aria-hidden','true');
 }catch(e){ /* CSS nebula gradient remains as fallback */ }
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   const scene=new THREE.Scene();
