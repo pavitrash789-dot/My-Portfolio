@@ -186,11 +186,18 @@ section{padding:72px 0;border-bottom:1px solid var(--rule)}
 .project li{margin-bottom:6px}
 
 /* certification */
-.cert{border:1px solid var(--rule);border-radius:8px;padding:22px 26px;max-width:660px;background:var(--card);display:flex;gap:18px;align-items:flex-start;transition:transform .22s,box-shadow .25s}
-.cert:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(0,0,0,.6)}
+.certs{display:grid;gap:16px;max-width:760px}
+.cert{border:1px solid var(--rule);border-radius:8px;padding:22px 26px;background:var(--card);display:flex;gap:18px;align-items:flex-start;transition:transform .22s,box-shadow .25s,border-color .25s}
+.cert:hover{transform:translateY(-3px);border-color:#35392f;box-shadow:0 16px 34px -18px rgba(0,0,0,.6)}
 .cert i{flex:none;width:44px;height:44px;border-radius:8px;background:var(--wash);border:1px solid var(--rule);color:var(--accent-ink);display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-style:normal;font-weight:500;font-size:15px}
 .cert b{font-family:"Source Serif 4",Georgia,serif;font-size:17px}
 .cert p{margin:5px 0 0;color:var(--muted);font-size:14.5px}
+.cert .cid{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;color:#7e8277;margin:9px 0 0;word-break:break-word}
+.cert .cid span{color:var(--muted)}
+.cert .view{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13.5px;font-weight:600;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px;transition:border-color .15s,color .15s}
+.cert .view:hover{color:#a8e8c3;border-color:var(--accent)}
+.cert .view i{font-style:normal;font-size:14px;transition:transform .18s}
+.cert .view:hover i{transform:translate(2px,-2px)}
 
 /* contact — full-width light band (inverts for contrast) */
 .contact{background:#eef0e4;color:#171a15;padding:80px 0;border-bottom:0}
@@ -328,7 +335,7 @@ footer a{color:inherit}
     </div>
     <dl class="facts rv">
       <div><dt>Education</dt><dd>B.Com, Finance &amp; Economics &middot; University of Kota &middot; 2023&ndash;2026</dd></div>
-      <div><dt>Certification</dt><dd>Business Analysis &amp; Process Management, Coursera &middot; 2026</dd></div>
+      <div><dt>Certification</dt><dd>Business Analysis &amp; Process Management, Coursera (2026) &middot; Python Bootcamp &amp; AI-Powered Data Analytics, CodeWithHarry (2026)</dd></div>
       <div><dt>Based in</dt><dd>Kota, Rajasthan</dd></div>
       <div><dt>Currently learning</dt><dd>Power BI, full-stack web development, AI application development</dd></div>
     </dl>
@@ -462,11 +469,31 @@ footer a{color:inherit}
 
 <section id="certification">
   <div class="shead rv"><h2>Certification</h2><span class="side">05 / credentials</span></div>
-  <div class="cert rv">
-    <i>&#10003;</i>
-    <div>
-      <b>Business Analysis &amp; Process Management</b>
-      <p>Coursera &middot; May&ndash;Jun 2026 &middot; Requirements analysis, process mapping, root-cause analysis, process improvement and documentation.</p>
+  <div class="certs" data-stagger>
+    <div class="cert rv">
+      <i>&#10003;</i>
+      <div>
+        <b>Business Analysis &amp; Process Management</b>
+        <p>Coursera &middot; May&ndash;Jun 2026 &middot; Requirements analysis, process mapping, root-cause analysis, process improvement and documentation.</p>
+      </div>
+    </div>
+    <div class="cert rv">
+      <i>DA</i>
+      <div>
+        <b>Ultimate Job-Ready AI-Powered Data Analytics Course</b>
+        <p>CodeWithHarry &middot; 14 Nov 2026 &middot; Applied data analytics with Python: data cleaning, analysis and visualisation for job-ready reporting.</p>
+        <p class="cid"><span>Certificate ID</span> CWH-THE-ULTIMATE-JOB-READY-AI-POWERED-DATA-ANALYTICS-COURSE-WM4TSUXX</p>
+        <a class="view" href="certificates/ai-powered-data-analytics-codewithharry.webp" target="_blank" rel="noopener" aria-label="View the AI-Powered Data Analytics certificate">View certificate <i>&#8599;</i></a>
+      </div>
+    </div>
+    <div class="cert rv">
+      <i>PY</i>
+      <div>
+        <b>Complete 2026 Python Bootcamp: Learn Python from Scratch</b>
+        <p>CodeWithHarry &middot; 14 Nov 2026 &middot; Python fundamentals through to practical scripting, including data types, loops, functions, files and modules.</p>
+        <p class="cid"><span>Certificate ID</span> CWH-COMPLETE-PYTHON-BOOTCAMP-LEARN-PYTHON-FROM-SCRATCH-WM4TSUXX</p>
+        <a class="view" href="certificates/python-bootcamp-codewithharry.webp" target="_blank" rel="noopener" aria-label="View the Python Bootcamp certificate">View certificate <i>&#8599;</i></a>
+      </div>
     </div>
   </div>
 </section>
